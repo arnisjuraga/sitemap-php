@@ -202,12 +202,12 @@ class Sitemap {
 		$this->incCurrentItem();
 		$this->getWriter()->startElement('url');
 		$this->getWriter()->writeElement('loc', $this->getDomain() . $loc);
-		if($priority !== null)
-			$this->getWriter()->writeElement('priority', $priority);
-		if ($changefreq)
-			$this->getWriter()->writeElement('changefreq', $changefreq);
 		if ($lastmod)
 			$this->getWriter()->writeElement('lastmod', $this->getLastModifiedDate($lastmod));
+		if($priority !== null)
+			$this->getWriter()->writeElement('priority', $priority);		
+		if ($changefreq)
+			$this->getWriter()->writeElement('changefreq', $changefreq);		
 		$this->getWriter()->endElement();
 		return $this;
 	}
