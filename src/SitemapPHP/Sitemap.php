@@ -39,19 +39,9 @@ class Sitemap {
 	 *
 	 * @param string $domain
 	 */
-	public function __construct($domain, ITEM_PER_SITEMAP=50000) {
+	public function __construct($domain, $item_per_sitemap=50000) {
 		$this->setDomain($domain);
-	    $this->setItemsPerSitemap(ITEM_PER_SITEMAP);
-	}
-
-	/**
-	 * Sets item_per_sitemap
-	 *
-	 * @param int $item_per_sitemap
-	 */
-	public function setDomain($item_per_sitemap) {
-		$this->item_per_sitemap = $item_per_sitemap;
-		return $this;
+	    $this->setItemPerSitemap($item_per_sitemap);
 	}
 
 	/**
@@ -61,6 +51,16 @@ class Sitemap {
 	 */
 	public function setDomain($domain) {
 		$this->domain = $domain;
+		return $this;
+	}
+
+	/**
+	 * Sets item_per_sitemap
+	 *
+	 * @param int $item_per_sitemap
+	 */
+	public function setItemPerSitemap($item_per_sitemap) {
+		$this->item_per_sitemap = $item_per_sitemap;
 		return $this;
 	}
 
