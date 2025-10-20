@@ -26,11 +26,12 @@ class Sitemap {
 	private $filename = 'sitemap';
 	private $current_item = 0;
 	private $current_sitemap = 0;
+	private $item_per_sitemap = 50000;
 
 	const EXT = '.xml';
 	const SCHEMA = 'http://www.sitemaps.org/schemas/sitemap/0.9';
 	const DEFAULT_PRIORITY = 0.5;
-	const ITEM_PER_SITEMAP = 50000;
+	#const ITEM_PER_SITEMAP = 50000;
 	const SEPERATOR = '-';
 	const INDEX_SUFFIX = 'index';
 
@@ -38,8 +39,19 @@ class Sitemap {
 	 *
 	 * @param string $domain
 	 */
-	public function __construct($domain) {
+	public function __construct($domain, ITEM_PER_SITEMAP=50000) {
 		$this->setDomain($domain);
+	    $this->setItemsPerSitemap(ITEM_PER_SITEMAP);
+	}
+
+	/**
+	 * Sets item_per_sitemap
+	 *
+	 * @param int $item_per_sitemap
+	 */
+	public function setDomain($item_per_sitemap) {
+		$this->item_per_sitemap = $item_per_sitemap;
+		return $this;
 	}
 
 	/**
@@ -180,7 +192,7 @@ class Sitemap {
 	 * @return Sitemap
 	 */
 	public function addItem($loc, $priority = self::DEFAULT_PRIORITY, $changefreq = NULL, $lastmod = NULL) {
-		if (($this->getCurrentItem() % self::ITEM_PER_SITEMAP) == 0) {
+		if (($this->getCurrentItem() % $this->item_per_sitemap) == 0) {
 			if ($this->getWriter() instanceof \XMLWriter) {
 				$this->endSitemap();
 			}
